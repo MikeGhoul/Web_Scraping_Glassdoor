@@ -77,26 +77,60 @@ class GlassdoorSpider(Spider):
             Name = rows[i].xpath('//*[@id="EmpHeroAndEmpInfo"]/div[3]/div[2]/p/text()').extract_first()
             Rating = rows[i].xpath('.//span[@class="value-title"]/@title').extract_first()
 
-            # if 'Work/Life Balance' in rows[i].xpath('.//div[@class="minor"]/text()').extract():
-            #     l = rows[i].xpath('.//div[@class="minor"]/text()').extract().index('Work/Life Balance')
-            # else:
-            #     l = []
+            if 'Work/Life Balance' in rows[i].xpath('.//div[@class="minor"]/text()').extract():
+                l = rows[i].xpath('.//div[@class="minor"]/text()').extract().index('Work/Life Balance')
+            else:
+                l = []
 
-            # if l != []:
-            #     WorkLife = row.xpath('.//span[@class="gdBars gdRatings med "]/@title').extract()[l]
-            # else:
-            #     WorkLife = ''
-
-
+            if l != []:
+                WorkLife = rows[i].xpath('.//span[@class="gdBars gdRatings med "]/@title').extract()[l]
+            else:
+                WorkLife = ''
 
 
-            WorkLife = rows[i].xpath('./div/div[2]/div/div[2]/div/div[1]/span/div/ul/li[1]/span/@title').extract_first()
-            CultureVal = rows[i].xpath('./div/div[2]/div/div[2]/div/div[1]/span/div/ul/li[2]/span/@title').extract_first()
-            CareerOpp = rows[i].xpath('./div/div[2]/div/div[2]/div/div[1]/span/div/ul/li[3]/span/@title').extract_first()
-            CompBen = rows[i].xpath('./div/div[2]/div/div[2]/div/div[1]/span/div/ul/li[4]/span/@title').extract_first()
-            SnrMgmt = rows[i].xpath('./div/div[2]/div/div[2]/div/div[1]/span/div/ul/li[5]/span/@title').extract_first()
+            if 'Culture & Values' in rows[i].xpath('.//div[@class="minor"]/text()').extract():
+                l = rows[i].xpath('.//div[@class="minor"]/text()').extract().index('Culture & Values')
+            else:
+                l = []
 
-            //*[@id="empReview_16032669"]/div/div[2]/div/div[2]/div/div[1]/span/div/ul/li[1]/div
+            if l != []:
+                CultureVal = rows[i].xpath('.//span[@class="gdBars gdRatings med "]/@title').extract()[l]
+            else:
+                CultureVal = ''
+
+
+            if 'Career Opportunities' in rows[i].xpath('.//div[@class="minor"]/text()').extract():
+                l = rows[i].xpath('.//div[@class="minor"]/text()').extract().index('Career Opportunities')
+            else:
+                l = []
+
+            if l != []:
+                CareerOpp = rows[i].xpath('.//span[@class="gdBars gdRatings med "]/@title').extract()[l]
+            else:
+                CareerOpp = ''
+
+
+            if 'Comp & Benefits' in rows[i].xpath('.//div[@class="minor"]/text()').extract():
+                l = rows[i].xpath('.//div[@class="minor"]/text()').extract().index('Comp & Benefits')
+            else:
+                l = []
+
+            if l != []:
+                CompBen = rows[i].xpath('.//span[@class="gdBars gdRatings med "]/@title').extract()[l]
+            else:
+                CompBen = ''
+
+
+            if 'Senior Management' in rows[i].xpath('.//div[@class="minor"]/text()').extract():
+                l = rows[i].xpath('.//div[@class="minor"]/text()').extract().index('Senior Management')
+            else:
+                l = []
+
+            if l != []:
+                SnrMgmt = rows[i].xpath('.//span[@class="gdBars gdRatings med "]/@title').extract()[l]
+            else:
+                SnrMgmt = ''
+
 
 
             if 'Recommends' in rows[i].xpath('.//span[@class="middle"]/text()').extract():
@@ -130,6 +164,13 @@ class GlassdoorSpider(Spider):
             UserSumm = rows[i].xpath('.//p[@class=" tightBot mainText"]/text()').extract_first()
 
 
+            # if "("  in rows[i].xpath('.//p[@class=" tightBot mainText"]/text()').extract_first():
+            #     # s = rows[i].xpath('.//p[@class=" tightBot mainText"]/text()').extract_first()
+
+            #     YearSumm = rows[i].xpath('.//p[@class=" tightBot mainText"]/text()').extract_first()[rows[i].xpath('.//p[@class=" tightBot mainText"]/text()').extract_first().find("(")+1:rows[i].xpath('.//p[@class=" tightBot mainText"]/text()').extract_first().find(")")]
+            # else:
+            #     YearSumm = ''
+
             Pros = ' '.join(rows[i].xpath('.//p[@class=" pros mainText truncateThis wrapToggleStr"]/text()').extract())
             Cons = ' '.join(rows[i].xpath('.//p[@class=" cons mainText truncateThis wrapToggleStr"]/text()').extract())
             Advice = ' '.join(rows[i].xpath('.//p[@class=" adviceMgmt mainText truncateThis wrapToggleStr"]/text()').extract())
@@ -149,6 +190,7 @@ class GlassdoorSpider(Spider):
             AuthLoc = self.verify(AuthLoc)
             DateRev = self.verify(DateRev)
             UserSumm = self.verify(UserSumm)
+            # YearSumm = self.verify(YearSumm)
             Pros = self.verify(Pros)
             Cons = self.verify(Cons)
             Advice = self.verify(Advice)
@@ -169,6 +211,7 @@ class GlassdoorSpider(Spider):
             item['AuthLoc'] = AuthLoc
             item['DateRev'] = DateRev
             item['UserSumm'] = UserSumm
+            # item['YearSumm'] = YearSumm
             item['Pros'] = Pros
             item['Cons'] = Cons
             item['Advice'] = Advice
