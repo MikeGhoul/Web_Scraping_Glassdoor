@@ -164,13 +164,6 @@ class GlassdoorSpider(Spider):
             UserSumm = rows[i].xpath('.//p[@class=" tightBot mainText"]/text()').extract_first()
 
 
-            # if "("  in rows[i].xpath('.//p[@class=" tightBot mainText"]/text()').extract_first():
-            #     # s = rows[i].xpath('.//p[@class=" tightBot mainText"]/text()').extract_first()
-
-            #     YearSumm = rows[i].xpath('.//p[@class=" tightBot mainText"]/text()').extract_first()[rows[i].xpath('.//p[@class=" tightBot mainText"]/text()').extract_first().find("(")+1:rows[i].xpath('.//p[@class=" tightBot mainText"]/text()').extract_first().find(")")]
-            # else:
-            #     YearSumm = ''
-
             Pros = ' '.join(rows[i].xpath('.//p[@class=" pros mainText truncateThis wrapToggleStr"]/text()').extract())
             Cons = ' '.join(rows[i].xpath('.//p[@class=" cons mainText truncateThis wrapToggleStr"]/text()').extract())
             Advice = ' '.join(rows[i].xpath('.//p[@class=" adviceMgmt mainText truncateThis wrapToggleStr"]/text()').extract())
@@ -190,7 +183,6 @@ class GlassdoorSpider(Spider):
             AuthLoc = self.verify(AuthLoc)
             DateRev = self.verify(DateRev)
             UserSumm = self.verify(UserSumm)
-            # YearSumm = self.verify(YearSumm)
             Pros = self.verify(Pros)
             Cons = self.verify(Cons)
             Advice = self.verify(Advice)
@@ -211,7 +203,6 @@ class GlassdoorSpider(Spider):
             item['AuthLoc'] = AuthLoc
             item['DateRev'] = DateRev
             item['UserSumm'] = UserSumm
-            # item['YearSumm'] = YearSumm
             item['Pros'] = Pros
             item['Cons'] = Cons
             item['Advice'] = Advice
